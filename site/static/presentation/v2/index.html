@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+
+    <title>TNEBooks & Technology Assisted Teaching (TaT) - Impact, News & Revenue Model</title>
+
+    <!-- Reveal.js CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reset.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/theme/dracula.min.css">
+
+    <!-- Custom Styling for Enhanced Visual Hierarchy -->
+    <style>
+        :root {
+            --primary-accent: #00f2fe;
+            --secondary-accent: #4facfe;
+            --strike-red: #ff5555;
+            --highlight-green: #50fa7b;
+            --highlight-yellow: #f1fa8c;
+            --highlight-purple: #bd93f9;
+            --card-bg: rgba(255, 255, 255, 0.05);
+            --card-border: rgba(255, 255, 255, 0.12);
+        }
+
+        .version-bar {
+            position: fixed;
+            top: 12px;
+            right: 16px;
+            z-index: 9999;
+            background: rgba(15, 23, 42, 0.9);
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            backdrop-filter: blur(10px);
+            padding: 6px 14px;
+            border-radius: 20px;
+            font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-size: 0.82rem;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #f8f8f2;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+        }
+
+        .version-bar .badge-active {
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #0d1117;
+            font-weight: 700;
+            padding: 2px 10px;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .version-bar a {
+            color: #8be9fd;
+            text-decoration: none;
+            font-weight: 600;
+            padding: 2px 8px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+
+        .version-bar a:hover {
+            color: #fff;
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .reveal h1,
+        .reveal h2,
+        .reveal h3,
+        .reveal h4 {
+            text-transform: none;
+            letter-spacing: normal;
+        }
+
+        .reveal .strike-text {
+            text-decoration: line-through;
+            color: var(--strike-red);
+            opacity: 0.85;
+        }
+
+        .reveal .bold-text {
+            font-weight: bold;
+            color: var(--highlight-green);
+            text-transform: uppercase;
+        }
+
+        .tag-pill {
+            display: inline-block;
+            background: rgba(0, 242, 254, 0.15);
+            border: 1px solid var(--primary-accent);
+            color: var(--primary-accent);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 2px 10px;
+            border-radius: 20px;
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 1.2rem;
+            margin-top: 1.5rem;
+        }
+
+        .card-grid-2 {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1.2rem;
+            margin-top: 1.2rem;
+        }
+
+        .card-grid-3 {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.2rem;
+            margin-top: 1.2rem;
+        }
+
+        .card {
+            background: var(--card-bg);
+            border-radius: 12px;
+            padding: 1.2rem;
+            border: 1px solid var(--card-border);
+            backdrop-filter: blur(6px);
+            text-align: left;
+            transition: transform 0.2s ease, border-color 0.2s ease;
+        }
+
+        .card:hover {
+            border-color: var(--primary-accent);
+        }
+
+        .card h4 {
+            color: var(--primary-accent);
+            margin-top: 0;
+            margin-bottom: 0.5rem;
+            font-size: 1.15rem;
+        }
+
+        .card p,
+        .card ul {
+            font-size: 0.85rem;
+            line-height: 1.45;
+            margin: 0;
+            color: #e2e8f0;
+        }
+
+        .card ul {
+            padding-left: 1.2rem;
+            margin-top: 0.4rem;
+        }
+
+        .card ul li {
+            margin-bottom: 0.3rem;
+        }
+
+        .timeline {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+            margin-top: 1.2rem;
+        }
+
+        .timeline-step {
+            display: flex;
+            align-items: center;
+            background: var(--card-bg);
+            border-left: 5px solid var(--primary-accent);
+            padding: 0.85rem 1.2rem;
+            border-radius: 0 8px 8px 0;
+            text-align: left;
+        }
+
+        .timeline-step .step-num {
+            font-size: 1.25rem;
+            font-weight: bold;
+            color: var(--secondary-accent);
+            margin-right: 1.2rem;
+            min-width: 75px;
+        }
+
+        .timeline-step .step-content h4 {
+            margin: 0 0 0.2rem 0;
+            font-size: 1.05rem;
+            color: #fff;
+        }
+
+        .timeline-step .step-content p {
+            margin: 0;
+            font-size: 0.82rem;
+            color: #ccc;
+        }
+
+        .metric-box {
+            background: linear-gradient(135deg, rgba(79, 172, 254, 0.18) 0%, rgba(0, 242, 254, 0.18) 100%);
+            border: 1px solid var(--primary-accent);
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+        }
+
+        .metric-box .number {
+            font-size: 2.2rem;
+            font-weight: bold;
+            color: var(--highlight-green);
+        }
+
+        .metric-box .label {
+            font-size: 0.85rem;
+            color: #f8f8f2;
+            margin-top: 0.3rem;
+        }
+
+        .subtext {
+            font-size: 0.58em;
+            opacity: 0.75;
+            display: block;
+            margin-top: 0.4rem;
+            color: #8be9fd;
+        }
+
+        .highlight-quote {
+            background: rgba(189, 147, 249, 0.1);
+            border-left: 4px solid var(--highlight-purple);
+            padding: 1rem 1.2rem;
+            border-radius: 0 10px 10px 0;
+            font-size: 0.9rem;
+            text-align: left;
+            margin-top: 1rem;
+            color: #f8f8f2;
+        }
+
+        .news-badge {
+            background: linear-gradient(90deg, #ff79c6, #bd93f9);
+            color: #000;
+            font-weight: bold;
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 6px;
+            display: inline-block;
+            margin-bottom: 0.4rem;
+            text-transform: uppercase;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Version Switcher Bar -->
+    <div class="version-bar">
+        <span>Version:</span>
+        <span class="badge-active">v2.0 (News &amp; Revenue)</span>
+        <a href="../v1/index.html">v1.0 (Proposal)</a>
+    </div>
+
+    <div class="reveal">
+        <div class="slides">
+
+            <!-- Slide 1: Title Slide -->
+            <section style="text-align: center;">
+                <div
+                    style="background: linear-gradient(135deg, rgba(79,172,254,0.12) 0%, rgba(0,242,254,0.12) 100%); padding: 2.2rem; border-radius: 16px; border: 1px solid var(--primary-accent);">
+                    <div class="news-badge">Platform Evolution &amp; Milestone Edition</div>
+                    <h1 style="font-size: 2.6rem; margin-bottom: 0.4rem; color: #fff;">Technology Assisted Teaching</h1>
+                    <h3 style="font-size: 1.5rem; color: var(--primary-accent); font-weight: normal; margin-top: 0;">
+                        (TaT) &amp; TNEBooks Platform</h3>
+
+                    <hr style="border-color: var(--secondary-accent); margin: 1.2rem auto; width: 55%;">
+
+                    <p style="font-size: 1.05rem; color: #f8f8f2; margin-bottom: 1.2rem;">
+                        A Human-Centered, Open-Source Educational Ecosystem &amp; Sustainable Impact Model
+                    </p>
+
+                    <div
+                        style="font-size: 0.82rem; color: #6272a4; display: flex; justify-content: space-around; flex-wrap: wrap; gap: 0.8rem; margin-top: 1.5rem;">
+                        <span>📍 <strong>Origin:</strong> Ramanathapuram Groundwork</span>
+                        <span>🤝 <strong>Supported by:</strong> TNJUG, KEC &amp; Industry Mentors</span>
+                        <span>🚀 <strong>Scale:</strong> 100+ Schools Approved</span>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 2: Macro Landscape -->
+            <section>
+                <h2>Education is <span class="strike-text">Digital in FUTURE</span> .. <span
+                        class="bold-text">NOW</span></h2>
+                <hr style="border-color: var(--primary-accent); margin-bottom: 1.5rem;">
+
+                <div class="card-grid-3">
+                    <div class="card">
+                        <div class="tag-pill">State Policy</div>
+                        <h4>1. TN Spark Initiative</h4>
+                        <p>Driving statewide digital enablement, smart classroom rollouts, and tech-driven curriculum
+                            integration across Tamil Nadu.</p>
+                    </div>
+                    <div class="card">
+                        <div class="tag-pill">National Shift</div>
+                        <h4>2. CBSE Going Paperless</h4>
+                        <p>Transitioning academic assessments, administrative workflows, and study resources into
+                            unified digital ecosystems.</p>
+                    </div>
+                    <div class="card">
+                        <div class="tag-pill">Competitive Access</div>
+                        <h4>3. PM Competitive Coaching</h4>
+                        <p>Democratizing high-stakes competitive and scholarship exam preparation for rural and
+                            underprivileged learners.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 3: The Challenge to Opportunity -->
+            <section>
+                <h2>The <span class="strike-text">Challenge</span> .. <span class="bold-text">Opportunity</span></h2>
+                <hr style="border-color: var(--primary-accent); margin-bottom: 1.5rem;">
+
+                <div class="card-grid">
+                    <div class="card" style="grid-column: span 2;">
+                        <h4>1. Systemic Operational Flaw</h4>
+                        <p>Emergency tools forced teachers onto fragmented online tools without digitizing the
+                            end-to-end teaching workflow or catering to low-bandwidth environments.</p>
+                    </div>
+                    <div class="card">
+                        <h4>2. Hardware Cost</h4>
+                        <p>Prohibitive procurement costs for enterprise-grade hardware in rural institutions.</p>
+                    </div>
+                    <div class="card" style="grid-column: span 3;">
+                        <h4>3. Software Licensing Trap</h4>
+                        <p>High recurring per-seat licensing fees making proprietary EdTech completely unsustainable for
+                            government and rural schools.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 4: Our Story / Philosophy -->
+            <section>
+                <h3>Our Story <span style="font-size: 0.6em; color: var(--primary-accent);">(Why We Are
+                        Different)</span></h3>
+
+                <div class="card"
+                    style="font-size: 0.85rem; line-height: 1.6; text-align: justify; max-height: 480px; overflow-y: auto;">
+                    <p style="margin-bottom: 1rem;">
+                        <strong>Technology Assisted Teaching (TaT)</strong> and <strong>TNEBooks</strong> represent a
+                        grassroots, open-source educational ecosystem engineered specifically for the realities of
+                        Indian government and aided schools. Born from hands-on field trials in Ramanathapuram, our
+                        platform bridges the digital divide by treating quality education as an open public good.
+                    </p>
+                    <p style="margin-bottom: 1rem;">
+                        Co-created by industry mentors (TNJUG), university engineering teams (Kongu Engineering
+                        College), and passionate school alumni, TNEBooks addresses real classroom constraints: zero
+                        software costs, offline-first local operation, simplified lesson planning, and self-guided
+                        revision modules.
+                    </p>
+                    <div class="highlight-quote">
+                        "We do not merely deliver digital files; we empower teachers with automated tools and ignite
+                        student curiosity through community-driven open-source education."
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 5: Major Milestone - Ramanathapuram & Erode District Collectors -->
+            <section>
+                <h2>District Leadership <span class="bold-text">Sanctions</span></h2>
+                <span class="subtext">From Student Innovation to District-Wide Administrative Adoption</span>
+                <hr style="border-color: var(--primary-accent); margin-bottom: 1.2rem;">
+
+                <div class="card-grid-2">
+                    <div class="card">
+                        <div class="news-badge">Official Permission Sanctioned</div>
+                        <h4>🏛️ Ramanathapuram District Collector</h4>
+                        <p>Presented the TNEBooks platform directly to <strong>Thiru. M. Sivaguru Prabhakaran,
+                                I.A.S.</strong>, District Collector of Ramanathapuram.</p>
+                        <ul>
+                            <li><strong>100 Schools Approved:</strong> Permission granted to deploy TNEBooks across
+                                <strong>50 Government Schools &amp; 50 Aided Schools</strong>.</li>
+                            <li>Direct access granted for district-wide field rollout, resources, and teacher
+                                onboarding.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="news-badge">HackFusion 2026 Showcase</div>
+                        <h4>🌟 Erode District Collector</h4>
+                        <p>Demonstrated the working TNEBooks platform to <strong>Thiru. S. Kandasamy, IAS</strong>,
+                            District Collector of Erode at HackFusion 2026 (VET Arts &amp; Science College).</p>
+                        <ul>
+                            <li>Received high commendation for accessible open-source design.</li>
+                            <li>Encouraged official scale-up across schools throughout Erode district.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 6: Global & Industry Recognition - TOSS 2026 & Canonical -->
+            <section>
+                <h2>Industry Recognition &amp; <span class="bold-text">TOSS 2026</span></h2>
+                <span class="subtext">Validating Open-Source Architecture on the Global Stage</span>
+                <hr style="border-color: var(--primary-accent); margin-bottom: 1.2rem;">
+
+                <div class="card-grid-2">
+                    <div class="card">
+                        <div class="news-badge">Conference Milestone</div>
+                        <h4>🚀 TOSS Conference 2026</h4>
+                        <p>TNEBooks was selected to be showcased at the prestigious <strong>TOSS Conference
+                                2026</strong>, presenting the open-source educational mission before educators,
+                            students, and open-source leaders.</p>
+                        <p style="margin-top: 0.5rem;">Demonstrated how community-driven curriculum curation solves
+                            rural educational accessibility.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="news-badge">Canonical Leadership Interaction</div>
+                        <h4>🤝 Presentation to Canonical Leadership</h4>
+                        <p>Presented the platform architecture directly to <strong>Samir Kamerkar, Engineering Director
+                                at Canonical</strong>.</p>
+                        <ul>
+                            <li>Received expert insights on enterprise open-source scalability.</li>
+                            <li>Validated the student-led contribution workflow and Linux-based deployment models.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 7: Field Validation & Grassroots Impact -->
+            <section>
+                <h2>Ground Fieldwork &amp; <span class="bold-text">Validation</span></h2>
+                <hr style="border-color: var(--primary-accent); margin-bottom: 1.2rem;">
+
+                <div class="card-grid-3">
+                    <div class="card">
+                        <h4>🎈 Kalvi Thiruvizha</h4>
+                        <p>Field validation with rural students; proven uptake in competitive exam preparation,
+                            NTSE/NMMS scholarships, and self-study.</p>
+                    </div>
+                    <div class="card">
+                        <h4>🏫 Model &amp; Govt Schools</h4>
+                        <p>Conducted teacher awareness at <strong>Thinaikulam Govt School</strong> &amp; <strong>Govt
+                                Model School</strong>. Mentored high school students (Class 10 &amp; 11) in VS Code,
+                            Git, and open source.</p>
+                    </div>
+                    <div class="card">
+                        <h4>👩‍🏫 Teacher Enablement</h4>
+                        <p>Hands-on setup for Physics (Komala Teacher, Edubuntu), Chemistry (Deivanai Teacher, digital
+                            tools), and Math teachers contributing curriculum directly via GitHub.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 8: Ecosystem Expansion & Green Lab -->
+            <section>
+                <h2>Lab Expansion &amp; <span class="bold-text">Green Lab</span></h2>
+                <hr style="border-color: var(--primary-accent); margin-bottom: 1.2rem;">
+
+                <div class="card-grid-2">
+                    <div class="card">
+                        <div class="tag-pill">Institutional Labs</div>
+                        <h4>🌐 Academic Hubs &amp; Awards</h4>
+                        <ul>
+                            <li><strong>PSNA CET Workshop:</strong> One-week workshop establishing Open Source Lab &amp;
+                                TNEBooks student mentoring; received Recognition Shield.</li>
+                            <li><strong>GCE Erode (IRTT):</strong> Open Source Lab inaugurated in Automobile Engineering
+                                Dept.</li>
+                            <li><strong>Star Contributor Award:</strong> Awarded to Kaviamudhan K S jointly by KEC &amp;
+                                TNJUG.</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <div class="tag-pill">Hardware Innovation</div>
+                        <h4>🌱 The Green Lab Initiative</h4>
+                        <p>Pioneered at KEC with <strong>Ram Prakash (Computer Instruments)</strong> &amp;
+                            <strong>Sathish Kumar Thiyagarajan</strong>:</p>
+                        <ul>
+                            <li>Refurbishes and repurposes idle hardware with lightweight Edubuntu Linux.</li>
+                            <li>Provides low-cost offline classroom terminals and hardware troubleshooting for rural
+                                schools.</li>
+                        </ul>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 9: Implementation Plan (Sivagangai Framework) -->
+            <section>
+                <h2>Implementation Plan</h2>
+                <span class="subtext">Designed by CEO of Sivagangai No. 1 Educational District (2026)</span>
+
+                <div class="timeline">
+                    <div class="timeline-step">
+                        <div class="step-num">Phase 1</div>
+                        <div class="step-content">
+                            <h4>Infrastructure Audit &amp; Base Deployment</h4>
+                            <p>Audit school hardware/offline setups; deploy Green Lab Edubuntu systems &amp; local-first
+                                TNEBooks modules.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-num">Phase 2</div>
+                        <div class="step-content">
+                            <h4>Teacher Onboarding &amp; Content Enablement</h4>
+                            <p>Train educators on automated question generation, digital whiteboards, and visual lesson
+                                planning.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-num">Phase 3</div>
+                        <div class="step-content">
+                            <h4>Inter-School Networking &amp; Peer Mentoring</h4>
+                            <p>Establish connected school clusters; activate student-driven peer learning and high
+                                school open-source clubs.</p>
+                        </div>
+                    </div>
+                    <div class="timeline-step">
+                        <div class="step-num">Phase 4</div>
+                        <div class="step-content">
+                            <h4>Career Guidance &amp; Statewide Scaling</h4>
+                            <p>Launch automated SME Career Guidance Platform; roll out standardized district-level
+                                scholarship mocks.</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 10: Sustainable Hybrid Revenue Model -->
+            <section>
+                <h2>Sustainable <span class="bold-text">Revenue Model</span></h2>
+                <span class="subtext">100% Free Core for Government Schools • Commercial Viability through B2B, CSR
+                    &amp; Services</span>
+                <hr style="border-color: var(--primary-accent); margin-bottom: 1.2rem;">
+
+                <div class="card-grid">
+                    <div class="card">
+                        <div class="tag-pill"
+                            style="color: var(--highlight-green); border-color: var(--highlight-green);">B2B SaaS</div>
+                        <h4>1. Private School Open Core</h4>
+                        <p>White-labeled LMS, custom question bank generator, parent mobile app, and advanced diagnostic
+                            analytics sold to private/matriculation schools.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="tag-pill"
+                            style="color: var(--highlight-yellow); border-color: var(--highlight-yellow);">CSR &amp; PPP
+                        </div>
+                        <h4>2. Corporate CSR Sponsorship</h4>
+                        <p>Corporate sponsors fund cluster adoptions (50–100 schools) under Section 135 CSR mandates for
+                            digital education infrastructure.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="tag-pill"
+                            style="color: var(--highlight-purple); border-color: var(--highlight-purple);">Hardware
+                            &amp; AMC</div>
+                        <h4>3. Green Lab Refurbishment &amp; AMC</h4>
+                        <p>Turnkey hardware supply, Edubuntu installation, lab maintenance contracts (AMC), and
+                            peripheral servicing via local service partnerships.</p>
+                    </div>
+
+                    <div class="card">
+                        <div class="tag-pill" style="color: #ff79c6; border-color: #ff79c6;">Services &amp; Upskilling
+                        </div>
+                        <h4>4. Educator Training &amp; Certifications</h4>
+                        <p>Paid professional development workshops, AI prompt engineering masterclasses, and certified
+                            digital pedagogy programs for private teachers.</p>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Slide 11: Market Value & Impact Metrics -->
+            <section>
+                <h2>Market Value &amp; <span class="bold-text">Impact</span></h2>
+                <span class="subtext">Zero-cost open-source core delivering transformative educational ROI</span>
+
+                <div class="card-grid" style="margin-top: 1.2rem;">
+                    <div class="metric-box">
+                        <div class="number">₹0</div>
+                        <div class="label">Govt Software Licensing Cost</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="number">100+</div>
+                        <div class="label">Schools Approved in First Wave</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="number">70-80%</div>
+                        <div class="label">Exam Preparation Effort Saved</div>
+                    </div>
+                    <div class="metric-box">
+                        <div class="number">30-40%</div>
+                        <div class="label">Teacher Preparation Time Saved</div>
+                    </div>
+                </div>
+
+                <div class="highlight-quote" style="margin-top: 1.5rem; text-align: center;">
+                    ⚡ <strong>Proven in Ramanathapuram • Endorsed in Erode • Showcased at TOSS 2026 • Scalable Across
+                        Tamil Nadu</strong>
+                </div>
+            </section>
+
+            <!-- Slide 12: Q&A -->
+            <section style="text-align: center;">
+                <h1 style="font-size: 3.8rem; color: var(--primary-accent); margin-bottom: 0.5rem;">Q &amp; A</h1>
+                <p style="font-size: 1.4rem; color: #f8f8f2; margin-bottom: 1.5rem;">Empowering Every Teacher. Inspiring
+                    Every Learner.</p>
+                <div style="font-size: 0.95rem; color: #8be9fd; display: flex; justify-content: center; gap: 2rem;">
+                    <span>🌐 <a href="https://tnebooks.github.io" target="_blank"
+                            style="color: #50fa7b;">tnebooks.github.io</a></span>
+                    <span>💻 Open Source on GitHub</span>
+                    <span>📑 TaT Educational Ecosystem</span>
+                </div>
+            </section>
+
+        </div>
+    </div>
+
+    <!-- Reveal.js JavaScript -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/reveal.js/4.5.0/reveal.min.js"></script>
+    <script>
+        Reveal.initialize({
+            hash: true,
+            slideNumber: 'c/t',
+            transition: 'slide',
+            backgroundTransition: 'fade'
+        });
+    </script>
+</body>
+
+</html>
